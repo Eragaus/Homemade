@@ -9,10 +9,17 @@
         mc:Ignorable="d"
         Title="Homade" Height="450" Width="800">
     
+    <Window.Resources>
+        <Style x:Key="MaterialDesignMenuItemSelected" TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+            <Setter Property="Background" Value="#FF2196F3"/> <!-- Material Blue -->
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    
     <DockPanel>
         <!-- MENU BAR -->
         <Menu DockPanel.Dock="Left" Style="{StaticResource MaterialDesignMenu}" VerticalAlignment="Top">
-            <MenuItem Click="HomeMenu_Click" Style="{StaticResource MaterialDesignMenuItem}">
+            <MenuItem x:Name="HomeMenu" Click="HomeMenu_Click" Style="{StaticResource MaterialDesignMenuItem}">
                 <MenuItem.Header>
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Home" HorizontalAlignment="Center"/>
@@ -20,7 +27,7 @@
                     </StackPanel>
                 </MenuItem.Header>
             </MenuItem>
-            <MenuItem Click="NotesMenu_Click" Style="{StaticResource MaterialDesignMenuItem}">
+            <MenuItem x:Name="NotesMenu" Click="NotesMenu_Click" Style="{StaticResource MaterialDesignMenuItem}">
                 <MenuItem.Header>
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="NoteText" HorizontalAlignment="Center"/>

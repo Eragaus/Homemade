@@ -25,16 +25,26 @@ public partial class MainWindow : Window
         
         // Load HomePage at startup
         _nav = new NavigationController(MainFrame);
-        _nav.GoHome();
+        _nav.GoNotes();
     }
 
     private void HomeMenu_Click(object sender, RoutedEventArgs e)
     {
         _nav.GoHome();
+        SetSelectedMenuItem(HomeMenu);
     }
 
     private void NotesMenu_Click(object sender, RoutedEventArgs e)
     {
         _nav.GoNotes();
+        SetSelectedMenuItem(NotesMenu);
+    }
+    
+    private void SetSelectedMenuItem(MenuItem selected)
+    {
+        HomeMenu.Style = (Style)FindResource("MaterialDesignMenuItem");
+        NotesMenu.Style = (Style)FindResource("MaterialDesignMenuItem");
+        
+        selected.Style = (Style)FindResource("MaterialDesignMenuItemSelected");
     }
 }

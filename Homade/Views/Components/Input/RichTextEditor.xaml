@@ -83,7 +83,8 @@
                 BorderBrush="{DynamicResource PrimaryHueMidBrush}"
                 BorderThickness="1"
                 CornerRadius="4"
-                Padding="8">
+                Padding="8"
+                Background="White">
 
             <RichTextBox x:Name="Editor"
                          FontSize="14"

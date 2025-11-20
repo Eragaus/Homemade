@@ -27,13 +27,15 @@
                 <input:RichTextEditor x:Name="NoteEditor" Grid.Row="1"/>
 
                 <!-- SAVE BUTTON -->
-                <Button Content="Save Note"
+                <Button x:Name="SaveNoteButton" 
+                        Content="Save Note"
                         Width="140"
                         Grid.Row="2"
                         HorizontalAlignment="Right"
                         Margin="0 20 0 0"
                         Style="{StaticResource MaterialDesignRaisedButton}"
-                        Click="SaveNote_Click"/>
+                        Click="SaveNote_Click"
+                        IsEnabled="False"/>
             </Grid>
         </materialDesign:Card>
     </Grid> 

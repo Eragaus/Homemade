@@ -13,6 +13,6 @@ public class NavigationController(Frame frame)
 
     public void GoNotes()
     {
-        frame.Navigate(new NotePage());
+        frame.Navigate(new AddNotePage());
     }
 }
