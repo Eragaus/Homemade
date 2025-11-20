@@ -1,4 +1,4 @@
-﻿using Homade.Models;
+﻿using System.Windows;
 using Homade.Views;
 
 namespace Homade.Controllers;
@@ -10,11 +10,7 @@ public class MainController
     public MainController()
     {
         _view = new MainWindow();
-        _view.DataContext = new Note
-        {
-            Title="Welcome to Homade",
-            Content="This is your first note. Edit or delete it, and start creating more notes"
-        };
+        _view.WindowState = WindowState.Maximized;
     }
     
     public void ShowView()
