@@ -26,6 +26,7 @@ public partial class MainWindow : Window
         // Load HomePage at startup
         _nav = new NavigationController(MainFrame);
         _nav.GoNotes();
+        SetSelectedMenuItem(NotesMenu);
     }
 
     private void HomeMenu_Click(object sender, RoutedEventArgs e)
@@ -42,8 +43,9 @@ public partial class MainWindow : Window
     
     private void SetSelectedMenuItem(MenuItem selected)
     {
-        HomeMenu.Style = (Style)FindResource("MaterialDesignMenuItem");
-        NotesMenu.Style = (Style)FindResource("MaterialDesignMenuItem");
+        Style defaultStyle = (Style)FindResource("MaterialDesignMenuItem");
+        HomeMenu.Style = defaultStyle;
+        NotesMenu.Style = defaultStyle; //TODO improve this part to support more menu items
         
         selected.Style = (Style)FindResource("MaterialDesignMenuItemSelected");
     }
