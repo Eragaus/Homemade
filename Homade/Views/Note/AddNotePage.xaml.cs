@@ -1,11 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using Homade.Controllers.Notes;
 
 namespace Homade.Views.Note;
 
 public partial class AddNotePage : Page
 {
+    private NoteController _controller = NoteController.Instance;
+    
     public AddNotePage()
     {
         InitializeComponent();
@@ -16,13 +19,11 @@ public partial class AddNotePage : Page
     
     private void SaveNote_Click(object sender, RoutedEventArgs e)
     {
-        string title = TitleBox.Text;
-        string content = NoteEditor.GetContent(); // <-- from your component
-
-        // TODO: persist (database, json, file, etc)
-        MessageBox.Show("Note saved:\n" +
-                        "Title: " + title + "\n" +
-                        "Content length: " + content.Length);
+        _controller.Create(new Models.Note
+        {
+            Title = TitleBox.Text,
+            Content = NoteEditor.GetContent()
+        });
     }
     
     private void InputChanged(object sender, TextChangedEventArgs e)

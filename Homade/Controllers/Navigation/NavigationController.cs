@@ -2,8 +2,10 @@
 using Homade.Views.Home;
 using Homade.Views.Note;
 
-namespace Homade.Controllers;
+namespace Homade.Controllers.Navigation;
 
+
+// TODO make it with singleton pattern
 public class NavigationController(Frame frame)
 {
     public void GoHome()
