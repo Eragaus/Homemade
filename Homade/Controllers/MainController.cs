@@ -1,4 +1,7 @@
-﻿namespace Homade.Controllers;
+﻿using System.Windows;
+using Homade.Views;
+
+namespace Homade.Controllers;
 
 public class MainController
 {
@@ -7,6 +10,7 @@ public class MainController
     public MainController()
     {
         _view = new MainWindow();
+        _view.WindowState = WindowState.Maximized;
     }
     
     public void ShowView()

@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Homade.Views.Components.Input.RichTextEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- TOOLBAR -->
+        <StackPanel Orientation="Horizontal"
+                    Margin="0 0 0 8"
+                    VerticalAlignment="Center">
+
+            <!-- Bold -->
+            <Button Command="EditingCommands.ToggleBold"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}">
+                <materialDesign:PackIcon Kind="FormatBold" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Italic -->
+            <Button Command="EditingCommands.ToggleItalic"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}"
+                    Margin="6 0 0 0">
+                <materialDesign:PackIcon Kind="FormatItalic" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Underline -->
+            <Button Command="EditingCommands.ToggleUnderline"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}"
+                    Margin="6 0 0 0">
+                <materialDesign:PackIcon Kind="FormatUnderline" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Separator -->
+            <Rectangle Width="20" Fill="Transparent"/>
+
+            <!-- Bulleted List -->
+            <Button Command="EditingCommands.ToggleBullets"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}">
+                <materialDesign:PackIcon Kind="FormatListBulleted" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Numbered List -->
+            <Button Command="EditingCommands.ToggleNumbering"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}"
+                    Margin="6 0 0 0">
+                <materialDesign:PackIcon Kind="FormatListNumbered" Width="24" Height="24"/>
+            </Button>
+
+            <Rectangle Width="20" Fill="Transparent"/>
+
+            <!-- Align Left -->
+            <Button Command="EditingCommands.AlignLeft"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}">
+                <materialDesign:PackIcon Kind="FormatAlignLeft" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Align Center -->
+            <Button Command="EditingCommands.AlignCenter"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}"
+                    Margin="6 0 0 0">
+                <materialDesign:PackIcon Kind="FormatAlignCenter" Width="24" Height="24"/>
+            </Button>
+
+            <!-- Align Right -->
+            <Button Command="EditingCommands.AlignRight"
+                    CommandTarget="{Binding ElementName=Editor}"
+                    Style="{StaticResource MaterialDesignToolButton}"
+                    Margin="6 0 0 0">
+                <materialDesign:PackIcon Kind="FormatAlignRight" Width="24" Height="24"/>
+            </Button>
+        </StackPanel>
+
+
+        <!-- RICH TEXT BOX -->
+        <Border Grid.Row="1"
+                BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="8"
+                Background="White">
+
+            <RichTextBox x:Name="Editor"
+                         FontSize="14"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"/>
+        </Border>
+
+    </Grid>
+</UserControl>

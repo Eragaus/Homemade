@@ -4,5 +4,19 @@
              xmlns:local="clr-namespace:Homade">
     <Application.Resources>
          
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- Material Design -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesign3.defaults.xaml" />
+
+                <!-- Material Design Colors -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/secondary/MaterialDesignColor.Lime.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
