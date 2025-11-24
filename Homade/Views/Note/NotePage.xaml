@@ -5,32 +5,89 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Homade.Views.Note"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:Homade.Views.Converters"
       mc:Ignorable="d"
-      Title="NotePage" Height="450" Width="800">
-    <Grid Margin="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+      Title="NotePage">
+    <Page.Resources>
+        <converters:XamlToFlowDocumentConverter x:Key="XamlToFlowDocumentConverter" />
         
-        <TextBlock Text="Notes"
-                   FontWeight="Bold"
-                   FontSize="20" />
-        
-        <Button Grid.Column="1"
-                VerticalAlignment="Top"
-                Margin="8,0,0,0"
-                Style="{StaticResource MaterialDesignRaisedButton}">
+        <DataTemplate x:Key="NoteCardTemplate">
+            <materialDesign:Card Margin="8"
+                                 Width="250"
+                                 Padding="12"
+                                 Background="{DynamicResource MaterialDesignPaper}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Title}"
+                               FontWeight="Bold"
+                               FontSize="16"
+                               TextWrapping="Wrap"/>
 
-            <!-- Properly aligned icon + label -->
-            <DockPanel LastChildFill="False">
-                <materialDesign:PackIcon Kind="FormatListBulleted"
-                                         Width="24" Height="24"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,6,0" />
-                <TextBlock Text="Add Notes"
-                           VerticalAlignment="Center"/>
-            </DockPanel>
-        </Button>
+                    <TextBlock Text="{Binding Category}"
+                               Foreground="{DynamicResource PrimaryHueMidBrush}"
+                               Margin="0,4,0,0"
+                               FontSize="13"
+                               TextWrapping="Wrap"/>
+
+                    <Separator Margin="0,8"/>
+
+                    <FlowDocumentScrollViewer Document="{Binding Content, Converter={StaticResource XamlToFlowDocumentConverter}}"
+                                              IsToolBarVisible="False"
+                                              IsEnabled="False"
+                                              VerticalScrollBarVisibility="Hidden"
+                                              HorizontalScrollBarVisibility="Disabled"
+                                              IsHitTestVisible="False"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Padding="0"
+                                              MaxHeight="150" />
+                </StackPanel>
+            </materialDesign:Card>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Margin="0, 0, 0, 16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Notes"
+                       FontWeight="Bold"
+                       FontSize="20" />
+            
+            <Button Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Margin="8,0,0,0"
+                    Click="GoToAddNotePage_Click"
+                    Style="{StaticResource MaterialDesignRaisedButton}">
+
+                <!-- Properly aligned icon + label -->
+                <DockPanel LastChildFill="False">
+                    <materialDesign:PackIcon Kind="FormatListBulleted"
+                                             Width="24" Height="24"
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,6,0" />
+                    <TextBlock Text="Add Notes"
+                               VerticalAlignment="Center"/>
+                </DockPanel>
+            </Button>
+        </Grid>
+        
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Notes}"
+                          ItemTemplate="{StaticResource NoteCardTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

@@ -19,19 +19,20 @@ public partial class AddNotePage : Page
     
     private void SaveNote_Click(object sender, RoutedEventArgs e)
     {
-        _controller.Create(new Models.Note
+        _controller.Create(new Models.Notes.Note
         {
             Title = TitleBox.Text,
             Content = NoteEditor.GetContent()
         });
+        NavigationService?.Navigate(new NotePage());
     }
     
     private void InputChanged(object sender, TextChangedEventArgs e)
     {
-        bool hasTitle = !string.IsNullOrWhiteSpace(TitleBox.Text);
+        var hasTitle = !string.IsNullOrWhiteSpace(TitleBox.Text);
         
         var textRange = new TextRange(NoteEditor.Editor.Document.ContentStart, NoteEditor.Editor.Document.ContentEnd);
-        bool hasContent = !string.IsNullOrEmpty(textRange.Text.Trim());
+        var hasContent = !string.IsNullOrEmpty(textRange.Text.Trim());
 
         SaveNoteButton.IsEnabled = hasTitle && hasContent;
     }

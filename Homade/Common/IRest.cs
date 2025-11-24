@@ -1,4 +1,6 @@
-﻿namespace Homade.Common;
+﻿using Homade.Models.Notes;
+
+namespace Homade.Common;
 
 public interface IRest<T>
 {

@@ -1,4 +1,4 @@
-﻿using Homade.Models;
+﻿using Homade.Models.Notes;
 
 namespace Homade.Services.Notes;
 

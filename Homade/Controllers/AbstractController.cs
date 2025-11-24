@@ -1,5 +1,6 @@
 ﻿using Homade.Common;
 using Homade.Models;
+using Homade.Models.Notes;
 
 namespace Homade.Controllers;
 

@@ -1,15 +1,7 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Homade.Controllers;
-using Homade.Controllers.Navigation;
+using Homade.Views.Home;
+using Homade.Views.Note;
 
 namespace Homade.Views;
 
@@ -18,30 +10,30 @@ namespace Homade.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly NavigationController _nav;
     
     public MainWindow()
     {
         InitializeComponent();
-        
-        // Load HomePage at startup
-        _nav = new NavigationController(MainFrame);
-        _nav.GoNotes();
-        SetSelectedMenuItem(NotesMenu);
+        GoToNotePage();
     }
 
     private void HomeMenu_Click(object sender, RoutedEventArgs e)
     {
-        _nav.GoHome();
+        MainFrame.Navigate(new HomePage());
         SetSelectedMenuItem(HomeMenu);
     }
 
     private void NotesMenu_Click(object sender, RoutedEventArgs e)
     {
-        _nav.GoNotes();
+        GoToNotePage();
+    }
+
+    private void GoToNotePage()
+    {
+        MainFrame.Navigate(new NotePage());
         SetSelectedMenuItem(NotesMenu);
     }
-    
+
     private void SetSelectedMenuItem(MenuItem selected)
     {
         Style defaultStyle = (Style)FindResource("MaterialDesignMenuItem");
