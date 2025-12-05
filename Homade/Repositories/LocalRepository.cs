@@ -1,47 +1,65 @@
 ﻿using System.IO;
 using System.Text.Json;
+using Homade.Config;
+using Homade.Models;
 
 namespace Homade.Repositories;
 
-public class LocalRepository<T>: IRepository<T> where T: class, new()
+public class LocalRepository<T> : IRepository<T> where T : AbstractId, new()
 {
-    private readonly string _file = $"{typeof(T).Name}.json";
-    private List<T> _items = [];
-    private int _nextId = 1;
+    private readonly string _filePath = $"{typeof(T).Name}.json";
+    private readonly List<T> _items;
 
     public LocalRepository()
     {
-        if (File.Exists(_file))
+        if (File.Exists(_filePath))
         {
-            _items = JsonSerializer.Deserialize<List<T>>(File.ReadAllText(_file)) ?? new List<T>();
-            _nextId = _items.Count == 0 
-                ? 1 
-                : _items.Max(i => (int)typeof(T).GetProperty("Id").GetValue(i)) + 1;
+            var content = File.ReadAllText(_filePath);
+            _items = JsonSerializer.Deserialize<List<T>>(content)
+                     ?? [];
+        }
+        else
+        {
+            _items = [];
         }
     }
 
     public T Create(T entity)
     {
-        typeof(T).GetProperty("Id").SetValue(entity, _nextId++);
+        if (entity.Id == Guid.Empty)
+            entity.Id = Guid.NewGuid();
+
         _items.Add(entity);
         Save();
         return entity;
     }
 
     public IEnumerable<T> GetAll() => _items;
-    
-    public T Get(int id) => _items.FirstOrDefault(x => (int)typeof(T)?.GetProperty("Id").GetValue(x) == id);
 
-    public void Update(T entity) => Save();
-    
-    public void Delete(int id)
+    public T? Get(Guid id) =>
+        _items.FirstOrDefault(i => i.Id == id);  // <-- properly nullable
+
+    public void Update(T entity)
     {
-        _items.RemoveAll(x => (int)typeof(T).GetProperty("Id").GetValue(x) == id);
+        var index = _items.FindIndex(i => i.Id == entity.Id);
+        if (index != -1)
+        {
+            _items[index] = entity;
+            Save();
+        }
+    }
+
+    public void Delete(Guid id)
+    {
+        _items.RemoveAll(i => i.Id == id);
         Save();
     }
 
     private void Save()
     {
-        File.WriteAllText(_file, JsonSerializer.Serialize(_items, new JsonSerializerOptions() { WriteIndented = true }));
+        File.WriteAllText(
+            _filePath,
+            JsonSerializer.Serialize(_items, JsonConfig.Options)
+        );
     }
 }

@@ -3,8 +3,8 @@
 public interface IRepository<T>
 {
     T Create(T entity);
-    T Get(int id);
+    T? Get(Guid id);
     IEnumerable<T> GetAll();
     void Update(T entity);
-    void Delete(int id);
+    void Delete(Guid id);
 }
